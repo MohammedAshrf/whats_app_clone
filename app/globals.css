@@ -1,26 +1,59 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-main: #0f1c24;
+  --color-side: #1c2d35;
+  --color-gray: #8097a1;
+  --color-hover-50: rgba(46, 73, 86, 0.8);
+  --color-hover-100: #2e4956;
+  --color-green-50: rgb(0 255 115 / 0.5);
+  --color-green-100: #03aa82;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  .main_container {
+    @apply min-h-screen flex flex-col items-stretch 
+    bg-main;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .header {
+    @apply fixed top-0 left-0 w-full h-28 z-10 bg-main text-white 
+    flex flex-col items-stretch justify-between gap-4 p-4 border-b
+    border-hover-100 md:h-20;
+  }
+
+  .header_container {
+    @apply flex items-center justify-between w-full md:gap-2;
+  }
+
+  .header_actions {
+    @apply flex items-center gap-4;
+  }
+
+  .searchbar {
+    @apply w-full flex-1 bg-hover-100 text-white rounded-3xl py-1.5 px-4
+    flex justify-start gap-2;
+  }
+
+  .bottombar {
+    @apply fixed bottom-0 left-0 w-full h-20 z-10 bg-white text-black flex
+    lg:w-fit lg:h-full;
+  }
+
+  .bottombar_container {
+    @apply flex items-center justify-between w-full p-4 bg-main
+    border-t border-hover-100 lg:flex-col;
+  }
+
+  .chats {
+    @apply flex flex-1 flex-col items-stretch justify-start w-full gap-4
+    overflow-y-auto pt-28 pb-20 md:pt-20;
+  }
+
+  .chat {
+    @apply flex items-center bg-hover-100 gap-4 p-2 hover:bg-hover-50;
+  }
 }
