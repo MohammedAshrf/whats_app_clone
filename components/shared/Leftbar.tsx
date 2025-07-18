@@ -38,6 +38,15 @@ export default function Bottombar() {
             </Link>
           );
         })}
+        <div className="w-18 border-b border-gray-500" />
+        <div className="pt-4">
+          <Image
+            src="/assets/Meta_AI_icon.png"
+            alt="meta-ai-icon"
+            width={28}
+            height={28}
+          />
+        </div>
       </div>
     </section>
   );

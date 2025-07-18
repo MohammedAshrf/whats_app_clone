@@ -15,7 +15,8 @@
 
 @layer components {
   .main_container {
-    @apply h-screen min-h-screen lg:flex lg:flex-row bg-main;
+    @apply /* h-screen */
+    min-h-screen lg:flex lg:flex-row bg-main;
   }
 
   .header {
@@ -50,19 +51,22 @@
   }
 
   .leftbar {
-    @apply hidden lg:block lg:flex lg:w-fit lg:h-full lg:pt-20 bg-white text-black;
+    @apply hidden lg:block lg:fixed lg:w-fit lg:h-full lg:pt-20;
   }
 
   .leftbar_container {
     @apply flex items-center justify-start gap-2 w-full p-4 bg-side
-    border-e border-hover-100 
-    lg:flex-col;
+    border-e border-gray-500
+    lg:flex-col lg:h-full;
   }
 
   .chats {
     @apply flex flex-1 flex-col items-stretch justify-start w-full gap-4
     min-h-0
-    overflow-y-auto pt-28 pb-20 md:pt-0 lg:ps-2 lg:pt-20;
+    overflow-y-auto
+    pt-28 pb-20
+    md:pt-20 md:pb-0
+    lg:ps-26 lg:pt-20;
   }
 
   .chat {

@@ -12,7 +12,7 @@ export default function Search() {
       {focused && (
         <button
           type="button"
-          className="focus:outline-none"
+          className="focus:outline-none cursor-pointer"
           onClick={() => {
             setFocused(false);
             inputRef.current?.blur();
