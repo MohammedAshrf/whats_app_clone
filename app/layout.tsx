@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import Bottombar from '@/components/shared/Bottombar';
 import Header from '@/components/shared/Header';
+import Leftbar from '@/components/shared/Leftbar';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,10 +31,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <section className="main_container">
-          <Header />
-          {/* <LoadingBar /> */}
-          {/* Loading logic */}
-          {children}
+          <Leftbar />
+          <div className="flex flex-col flex-1 min-h-0">
+            <Header />
+            {/* <LoadingBar /> */}
+            {/* Loading logic */}
+            {children}
+          </div>
           <Bottombar />
         </section>
       </body>

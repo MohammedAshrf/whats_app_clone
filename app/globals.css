@@ -15,14 +15,14 @@
 
 @layer components {
   .main_container {
-    @apply min-h-screen flex flex-col items-stretch 
-    bg-main;
+    @apply h-screen min-h-screen lg:flex lg:flex-row bg-main;
   }
 
   .header {
     @apply fixed top-0 left-0 w-full h-28 z-10 bg-main text-white 
-    flex flex-col items-stretch justify-between gap-4 p-4 border-b
-    border-hover-100 md:h-20;
+    flex flex-col items-stretch justify-between gap-2 p-4 
+    /* border-b border-hover-100  */
+    md:h-20;
   }
 
   .header_container {
@@ -40,20 +40,32 @@
 
   .bottombar {
     @apply fixed bottom-0 left-0 w-full h-20 z-10 bg-white text-black flex
-    lg:w-fit lg:h-full;
+    lg:hidden lg:w-fit lg:h-full;
   }
 
   .bottombar_container {
     @apply flex items-center justify-between w-full p-4 bg-main
-    border-t border-hover-100 lg:flex-col;
+    /* border-t border-hover-100  */
+    lg:flex-col;
+  }
+
+  .leftbar {
+    @apply hidden lg:block lg:flex lg:w-fit lg:h-full lg:pt-20 bg-white text-black;
+  }
+
+  .leftbar_container {
+    @apply flex items-center justify-start gap-2 w-full p-4 bg-side
+    border-e border-hover-100 
+    lg:flex-col;
   }
 
   .chats {
     @apply flex flex-1 flex-col items-stretch justify-start w-full gap-4
-    overflow-y-auto pt-28 pb-20 md:pt-20;
+    min-h-0
+    overflow-y-auto pt-28 pb-20 md:pt-0 lg:ps-2 lg:pt-20;
   }
 
   .chat {
-    @apply flex items-center bg-hover-100 gap-4 p-2 hover:bg-hover-50;
+    @apply flex items-center bg-main gap-4 p-2 hover:bg-hover-50;
   }
 }
