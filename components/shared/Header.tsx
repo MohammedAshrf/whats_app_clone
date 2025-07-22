@@ -4,11 +4,13 @@ import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Search from './Search';
 
-export default function Header() {
+export default function Header({ hideSearchbar }: { hideSearchbar: boolean }) {
   const [open, setOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  console.log(hideSearchbar, 'hideSearchbar');
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -24,12 +26,16 @@ export default function Header() {
   }, [open]);
 
   return (
-    <section className="header">
+    <section className={`header ${hideSearchbar ? 'md:w-[400px]' : 'md:h-20'}`}>
       <div className="header_container">
         <h1 className="text-white text-lg font-semibold md:text-2xl">
           WhatsApp
         </h1>
-        <div className="hidden md:block flex-1">
+        <div
+          className={`hidden ${
+            hideSearchbar ? 'md:hidden' : 'md:block'
+          } flex-1`}
+        >
           <Search />
         </div>
         <div className="header_actions" ref={menuRef}>
@@ -127,7 +133,7 @@ export default function Header() {
           </button>
         </div>
       </div>
-      <div className="md:hidden flex-1">
+      <div className={`${hideSearchbar ? 'md:block' : 'md:hidden'} flex-1`}>
         <Search />
       </div>
     </section>

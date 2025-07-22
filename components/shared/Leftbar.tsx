@@ -16,12 +16,12 @@ export default function Bottombar() {
 
           return (
             <Link
-              className={`flex w-fit flex-col items-center gap-2 p-2`}
+              className={`flex w-fit flex-col items-center gap-2 p-2 curser-pointer`}
               href={link.route}
               key={link.label}
             >
               <div
-                className={`flex items-center justify-center ${
+                className={`flex items-center justify-center cursor-pointer ${
                   isActive ? 'bg-green-50 rounded-4xl' : ''
                 } w-12 h-9`}
               >
@@ -38,7 +38,7 @@ export default function Bottombar() {
             </Link>
           );
         })}
-        <div className="w-18 border-b border-gray-500" />
+        <div className="w-14 border-b border-hover-100" />
         <div className="pt-4">
           <Image
             src="/assets/Meta_AI_icon.png"

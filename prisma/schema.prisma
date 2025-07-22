@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  phoneNumber    String   @unique @map("phone_number")
+  username       String?
+  profilePicture String?  @map("profile_picture")
+  lastSeen       DateTime @default(now()) @map("last_seen")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  // Relations
+  sentMessages     Message[]        @relation("SentMessages")
+  chatParticipants ChatParticipant[]
+
+  @@map("users")
+}
+
+model Chat {
+  id           Int      @id @default(autoincrement())
+  isGroup      Boolean  @default(false) @map("is_group")
+  groupName    String?  @map("group_name")
+  groupPicture String?  @map("group_picture")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  messages     Message[]
+  participants ChatParticipant[]
+
+  @@map("chats")
+}
+
+model Message {
+  id          Int       @id @default(autoincrement())
+  content     String
+  messageType String    @default("text") @map("message_type")
+  sentAt      DateTime  @default(now()) @map("sent_at")
+  deliveredAt DateTime? @map("delivered_at")
+  readAt      DateTime? @map("read_at")
+
+  // Foreign Keys
+  chatId   Int @map("chat_id")
+  senderId Int @map("sender_id")
+
+  // Relations
+  chat   Chat @relation(fields: [chatId], references: [id])
+  sender User @relation("SentMessages", fields: [senderId], references: [id])
+
+  @@map("messages")
+}
+
+model ChatParticipant {
+  id       Int      @id @default(autoincrement())
+  joinedAt DateTime @default(now()) @map("joined_at")
+
+  // Foreign Keys
+  chatId Int @map("chat_id")
+  userId Int @map("user_id")
+
+  // Relations
+  chat Chat @relation(fields: [chatId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  // Unique constraint
+  @@unique([chatId, userId])
+  @@map("chat_participants")
+}
