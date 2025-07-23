@@ -9,6 +9,8 @@ datasource db {
 
 model User {
   id             Int      @id @default(autoincrement())
+  clerkId   String?       @unique
+  email     String?
   phoneNumber    String   @unique @map("phone_number")
   username       String?
   profilePicture String?  @map("profile_picture")

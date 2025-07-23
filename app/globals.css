@@ -57,7 +57,7 @@
   }
 
   .leftbar_container {
-    @apply flex items-center justify-start gap-2 w-full p-4 bg-side
+    @apply flex items-center justify-between gap-2 w-full p-4 bg-side
     border-e border-hover-100
     lg:flex-col lg:h-full;
   }
