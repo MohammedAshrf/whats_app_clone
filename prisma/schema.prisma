@@ -9,17 +9,20 @@ datasource db {
 
 model User {
   id             Int      @id @default(autoincrement())
-  clerkId   String?       @unique
-  email     String?
-  phoneNumber    String   @unique @map("phone_number")
-  username       String?
+  clerkId        String?       @unique
+  email          String?
+  username       String?       @unique
+  firstName      String?    @map("first_name")
+  lastName       String?    @map("last_name")     
   profilePicture String?  @map("profile_picture")
+  status         String   @default("active")
   lastSeen       DateTime @default(now()) @map("last_seen")
   createdAt      DateTime @default(now()) @map("created_at")
 
   // Relations
   sentMessages     Message[]        @relation("SentMessages")
   chatParticipants ChatParticipant[]
+  pinnedChats      PinnedChat[]
 
   @@map("users")
 }
@@ -27,6 +30,7 @@ model User {
 model Chat {
   id           Int      @id @default(autoincrement())
   isGroup      Boolean  @default(false) @map("is_group")
+  groupAdmins  String?  @map("group_admins")
   groupName    String?  @map("group_name")
   groupPicture String?  @map("group_picture")
   createdAt    DateTime @default(now()) @map("created_at")
@@ -35,6 +39,7 @@ model Chat {
   // Relations
   messages     Message[]
   participants ChatParticipant[]
+  pinnedChats  PinnedChat[]
 
   @@map("chats")
 }
@@ -73,4 +78,16 @@ model ChatParticipant {
   // Unique constraint
   @@unique([chatId, userId])
   @@map("chat_participants")
+}
+
+model PinnedChat {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    Int
+  pinnedAt  DateTime @default(now()) @map("pinned_at")
+
+  @@unique([userId, chatId])
+  @@map("pinned_chats")
 }
