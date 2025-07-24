@@ -11,16 +11,16 @@ export async function POST(req: NextRequest) {
     });
     return Response.json({ success: true, user });
   } catch (error) {
-    if (
-      error &&
-      typeof error === 'object' &&
-      'code' in error &&
-      error.code === 'P2002'
-    ) {
-      // Prisma unique constraint error
-      console.log('Error: Phone number already exists!');
-      // Handle duplicate phone number
-    }
+    // if (
+    //   error &&
+    //   typeof error === 'object' &&
+    //   'code' in error &&
+    //   error.code === 'P2002'
+    // ) {
+    //   // Prisma unique constraint error
+    //   console.log('Error: Phone number already exists!');
+    //   // Handle duplicate phone number
+    // }
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown error occurred';
     return Response.json({ error: errorMessage }, { status: 500 });
