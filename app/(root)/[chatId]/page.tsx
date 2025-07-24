@@ -17,10 +17,14 @@
 
 // app/(root)/[chatId]/page.tsx
 
-export default async function ChatPage({
-  params,
-}: {
-  params: { chatId: string };
-}) {
-  return <div>Chat ID: {params.chatId}</div>;
+// export default async function ChatPage({
+//   params,
+// }: {
+//   params: { chatId: string };
+// }) {
+//   return <div>Chat ID: {params.chatId}</div>;
+// }
+
+export default async function ChatPage() {
+  return <div>Chat ID: {'chatId'}</div>;
 }
