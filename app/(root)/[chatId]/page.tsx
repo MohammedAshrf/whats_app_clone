@@ -8,8 +8,9 @@ interface ChatPageProps {
   };
 }
 
-export default async function ChatPage({ params }: ChatPageProps) {
-  const { chatId } = await params;
+export default function ChatPage({ params }: ChatPageProps) {
+  const { chatId } = params;
+  console.log(params);
   console.log(typeof chatId);
 
   const chat = chats.find((c) => c.id === chatId);
